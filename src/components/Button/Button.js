@@ -12,8 +12,7 @@ export class Button extends Component {
 	addCount() {
 		this.setState((state) => {
 			return {
-				...state,
-				count: state.count + 1,
+				count: state.count < 10 ? state.count + 1 : 10,
 			};
 		});
 	}
@@ -21,29 +20,26 @@ export class Button extends Component {
 	minusCount() {
 		this.setState((state) => {
 			return {
-				...state,
-				count: state.count - 1,
+				count: state.count > 1 ? state.count - 1 : 0,
 			};
 		});
 	}
 
 	registerEvents() {
 		this.addEventListener('click', (e) => {
-			this.setState((state) => {
-				if (e.target.closest('.plus')) {
-					this.addCount();
-				} else if (e.target.closest('.minus')) {
-					this.minusCount();
-				}
-			});
+			if (e.target.closest('.plus')) {
+				this.addCount();
+			} else if (e.target.closest('.minus')) {
+				this.minusCount();
+			}
 		});
 	}
 
 	render() {
 		return `
-			<button data-action="plus">+</button>
+			<button class="plus">+</button>
 			<span>${this.state.count}</span>
-			<button data-action="minus">-</button>
+			<button class="minus">-</button>
 		`;
 	}
 }
