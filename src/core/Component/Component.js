@@ -8,18 +8,11 @@ export class Component extends HTMLElement {
 	setState(callback) {
 		this.state = callback(this.state);
 		this.innerHTML = this.render()
-			.trim()
-			.replaceAll(/true|false/gi, '')
-			.replaceAll(',', '');
 	}
 
 	connectedCallback() {
 		this.innerHTML = this.render()
-			.trim()
-			.replaceAll(/true|false/gi, '')
-			.replaceAll(',', '');
-		this.componentDidMount();
-		this.registerEvents();
+		this.componentDidMount()
 	}
 
 	disconnectedCallback() {
@@ -28,9 +21,7 @@ export class Component extends HTMLElement {
 
 	attributeChangedCallback(name, oldValue, newValue) {
 		this.componentWillUpdate(name, oldValue, newValue);
-		this.getAttributeNames.forEach(() => {
-			this.props[name] = this.getAttribute(name);
-		});
+		this.props[name] = this.getAttribute(name);
 	}
 
 	dispatch(type, props) {
@@ -39,13 +30,11 @@ export class Component extends HTMLElement {
 		);
 	}
 
-	componentWillUpdate() {}
+	componentWillUpdate() { }
 
-	render() {}
+	render() { }
 
-	componentWillUnmount() {}
+	componentWillUnmount() { }
 
-	registerEvents() {}
-
-	componentDidMount() {}
+	componentDidMount() { }
 }
